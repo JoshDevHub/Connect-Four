@@ -7,4 +7,10 @@ module Display
       Welcome to Connect Four!
     HEREDOC
   end
+
+  def query_message(message)
+    {
+      player_input: 'Which column would you like to place your piece in?'
+    }[message]
+  end
 end
