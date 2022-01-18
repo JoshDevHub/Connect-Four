@@ -32,6 +32,19 @@ describe Player do # rubocop: disable Metrics/BlockLength
       end
     end
 
-    context 'when user inputs two invalid values, then a valid input'
+    context 'when user inputs two invalid values, then a valid input' do
+      before do
+        symbol = ']'
+        large_number = '9'
+        valid_input = '2'
+        allow(player).to receive(:gets).and_return(symbol, large_number, valid_input)
+      end
+
+      it 'displays error message twice' do
+        error_message = 'That input is not in the range of columns you can place your piece in. Try again.'
+        expect(player).to receive(:puts).with(error_message).twice
+        player.user_selection
+      end
+    end
   end
 end
