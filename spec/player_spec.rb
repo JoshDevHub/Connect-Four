@@ -5,7 +5,7 @@ require_relative '../lib/player'
 describe Player do # rubocop: disable Metrics/BlockLength
   subject(:player) { described_class.new }
   describe '#user_selection' do
-    context 'when user_selection is valid' do
+    context 'when user input is valid' do
       before do
         valid_input = '5'
         allow(player).to receive(:gets).and_return(valid_input)
@@ -18,7 +18,7 @@ describe Player do # rubocop: disable Metrics/BlockLength
       end
     end
 
-    context 'when user_selection is invalid once, then valid' do
+    context 'when user inputs one invalid value, then a valid input' do
       before do
         letter = 'b'
         valid_input = '7'
@@ -31,5 +31,7 @@ describe Player do # rubocop: disable Metrics/BlockLength
         player.user_selection
       end
     end
+
+    context 'when user inputs two invalid values, then a valid input'
   end
 end
