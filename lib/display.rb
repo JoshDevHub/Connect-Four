@@ -13,4 +13,10 @@ module Display
       player_input: 'Which column would you like to place your piece in?'
     }[message]
   end
+
+  def error_message(message)
+    {
+      disk_insert: 'That input is not in the range of columns you can place your piece in. Try again.'
+    }[message]
+  end
 end
