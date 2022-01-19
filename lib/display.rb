@@ -16,7 +16,7 @@ module Display
 
   def error_message(message)
     {
-      disk_insert: 'That input is not in the range of columns you can place your piece in. Try again.'
+      not_in_range: 'That input is not in the range of columns you can place your piece in. Try again.'
     }[message]
   end
 end

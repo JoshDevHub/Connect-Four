@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require_relative 'display'
-
 # class that holds logic for the game's players
 class Player
   include Display
@@ -10,8 +9,7 @@ class Player
     selection = take_input
     return selection if valid_selection?(selection)
 
-    # puts error_message(:not_in_range)
-    puts 'That input is not in the range of columns you can place your piece in. Try again.'
+    puts error_message(:not_in_range)
     user_selection
   end
 
