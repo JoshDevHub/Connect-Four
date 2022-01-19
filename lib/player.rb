@@ -20,6 +20,7 @@ class Player
   end
 
   def valid_selection?(selection)
-    ('1'..'7').include?(selection)
+    valid_range = ('1'..'7')
+    valid_range.include?(selection)
   end
 end

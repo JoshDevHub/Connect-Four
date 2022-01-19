@@ -4,7 +4,7 @@ require_relative '../lib/player'
 
 describe Player do # rubocop: disable Metrics/BlockLength
   subject(:player) { described_class.new }
-  describe '#user_selection' do
+  describe '#user_selection' do # rubocop: disable Metrics/BlockLength
     context 'when user input is valid' do
       before do
         valid_input = '5'
