@@ -6,19 +6,22 @@ describe Board do
   subject(:board) { described_class.new }
 
   describe '#place_disc' do
-    context 'when the color of the disc is red' do
-      disk_color = 'red'
+    context 'when the board is empty' do
+      context 'when the color is red' do
+        disc_color = 'red'
+        it 'places a red disc in column 1 of the board' do
+          column = '1'
+          coordinate = [0, 0]
+          expect(board.board_grid[coordinate]).to eq(disc_color)
+          board.place_disc(disc_color, column)
+        end
 
-      it 'places a red disc at coordinate (2, 3) of the board' do
-        location = [2, 3]
-        expect(board.board_grid[location]).to eq(disk_color)
-        board.place_disc(disc_color, location)
-      end
-
-      it 'places a red disc at coordinate (5, 2) of the board' do
-        location = [5, 2]
-        expect(board.board_grid[location]).to eq(disk_color)
-        board.place_disc(disc_color, location)
+        it 'places a red disc in column 5 of the board' do
+          column = '5'
+          coordinate = [4, 0]
+          expect(board.board_grid[coordinate]).to eq(disc_color)
+          board.place_disc(disc_color, column)
+        end
       end
     end
   end
