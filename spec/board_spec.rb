@@ -6,7 +6,7 @@ describe Board do # rubocop: disable Metrics/BlockLength
   subject(:board) { described_class.new }
 
   describe '#place_disc' do # rubocop: disable Metrics/BlockLength
-    context 'when the board is empty' do
+    context 'when the column is empty' do
       context 'when the color is red' do
         disc_color = 'red'
         it 'places a red disc in column 1 of the board' do
