@@ -15,7 +15,7 @@ class Board
     y_pos = 0
     key_pointer = [x_pos, y_pos]
     y_pos += 1 until board_grid[key_pointer].nil?
-    board_grid[current_pointer] = color
+    board_grid[key_pointer] = color
   end
 
   private
