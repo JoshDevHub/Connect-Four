@@ -22,8 +22,11 @@ class Board
   end
 
   def connect_four?(disc)
-    columns.any? { |column| connect_four(column, disc) } ||
-      rows.any? { |row| connect_four(row, disc) }
+    (columns + rows).any? { |section| four_consecutive?(section, disc) }
+  end
+
+  def test_diagonal
+    # placeholder
   end
 
   private
@@ -39,7 +42,7 @@ class Board
   end
 
   # TODO: rename
-  def connect_four(subsection, disc)
+  def four_consecutive?(subsection, disc)
     connect = false
     subsection.each_cons(4) do |cons4|
       connect = true if cons4.all? { |slot| slot == disc }
@@ -65,3 +68,5 @@ class Board
     row_coords
   end
 end
+
+p Board.new.test_diagonal
