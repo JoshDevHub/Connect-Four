@@ -18,8 +18,7 @@ class Board
 
   def column_full?(column)
     x = column.to_i - 1
-    column_to_check = board_grid.keys.select { |key| key[0] == x }
-    column_to_check.none? { |coord| board_grid[coord].nil? }
+    columns[x].none?(&:nil?)
   end
 
   private
@@ -32,5 +31,14 @@ class Board
       end
     end
     board_hash
+  end
+
+  def columns
+    column_coords = []
+    7.times do |i|
+      column = [i].product((0..5).to_a).map { |ndx| board_grid[ndx] }
+      column_coords << column
+    end
+    column_coords
   end
 end
