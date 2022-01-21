@@ -79,7 +79,7 @@ describe Board do # rubocop: disable Metrics/BlockLength
     end
   end
 
-  describe '#column_full?' do
+  describe '#column_full?' do # rubocop: disable Metrics/BlockLength
     context 'when none of the columns are full' do
       subject(:board_column_space) { described_class.new }
       before do
@@ -93,8 +93,27 @@ describe Board do # rubocop: disable Metrics/BlockLength
         }
         board_column_space.instance_variable_set(:@board_grid, partial_board)
       end
-      it 'returns false when no column is full' do
-        expect(board_column_space.column_full?).to be(false)
+      it "returns false when column 3 isn't full" do
+        column = '3'
+        expect(board_column_space.column_full?(column)).to be(false)
+      end
+    end
+    context 'when a column is full' do
+      subject(:board_full_column) { described_class.new }
+      before do
+        board_with_full_col = {
+          [0, 0]=>'red', [1, 0]=>'red', [2, 0]=>'red', [3, 0]=>'yellow', [4, 0]=>nil, [5, 0]=>nil, [6, 0]=>nil,
+          [0, 1]=>'yellow', [1, 1]=>'yellow', [2, 1]=>'yellow', [3, 1]=>'red', [4, 1]=>nil, [5, 1]=>nil, [6, 1]=>nil,
+          [0, 2]=>nil, [1, 2]=>'red', [2, 2]=>'red', [3, 2]=>nil, [4, 2]=>nil, [5, 2]=>nil, [6, 2]=>nil,
+          [0, 3]=>nil, [1, 3]=>'yellow', [2, 3]=>nil, [3, 3]=>nil, [4, 3]=>nil, [5, 3]=>nil, [6, 3]=>nil,
+          [0, 4]=>nil, [1, 4]=>'red', [2, 4]=>nil, [3, 4]=>nil, [4, 4]=>nil, [5, 4]=>nil, [6, 4]=>nil,
+          [0, 5]=>nil, [1, 5]=>'yellow', [2, 5]=>nil, [3, 5]=>nil, [4, 5]=>nil, [5, 5]=>nil, [6, 5]=>nil
+        }
+        board_full_column.instance_variable_set(:@board_grid, board_with_full_col)
+      end
+      it 'returns true when column 2 is full' do
+        column = '2'
+        expect(board_full_column.column_full?(column)).to be(true)
       end
     end
   end
