@@ -138,7 +138,7 @@ describe Board do # rubocop: disable Metrics/BlockLength
       end
     end
 
-    context 'when a connect four is on the board' do
+    context 'when a connect four is on the board' do # rubocop: disable Metrics/BlockLength
       context 'when the connect four is a column' do
         subject(:board_column_connect) { described_class.new }
         before do
@@ -155,6 +155,25 @@ describe Board do # rubocop: disable Metrics/BlockLength
         it "returns true when there's a connect four of red discs in column 2" do
           color = 'red'
           expect(board_column_connect.connect_four?(color)).to be(true)
+        end
+      end
+
+      context 'when the connect four is a row' do
+        subject(:board_row_connect) { described_class.new }
+        before do
+          board_with_connect = {
+            [0, 0]=>'red', [1, 0]=>'red', [2, 0]=>'red', [3, 0]=>'yellow', [4, 0]=>'yellow', [5, 0]=>'yellow', [6, 0]=>'yellow',
+            [0, 1]=>'yellow', [1, 1]=>'red', [2, 1]=>'yellow', [3, 1]=>'red', [4, 1]=>nil, [5, 1]=>nil, [6, 1]=>nil,
+            [0, 2]=>nil, [1, 2]=>'red', [2, 2]=>'red', [3, 2]=>nil, [4, 2]=>nil, [5, 2]=>nil, [6, 2]=>nil,
+            [0, 3]=>nil, [1, 3]=>'red', [2, 3]=>nil, [3, 3]=>nil, [4, 3]=>nil, [5, 3]=>nil, [6, 3]=>nil,
+            [0, 4]=>nil, [1, 4]=>nil, [2, 4]=>nil, [3, 4]=>nil, [4, 4]=>nil, [5, 4]=>nil, [6, 4]=>nil,
+            [0, 5]=>nil, [1, 5]=>nil, [2, 5]=>nil, [3, 5]=>nil, [4, 5]=>nil, [5, 5]=>nil, [6, 5]=>nil
+          }
+          board_row_connect.instance_variable_set(:@board_grid, board_with_connect)
+        end
+        it "returns true when there's a connect four of yellow discs on row 1" do
+          color = 'yellow'
+          expect(board_row_connect.connect_four?(color)).to be(true)
         end
       end
     end
