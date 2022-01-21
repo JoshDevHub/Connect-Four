@@ -21,6 +21,10 @@ class Board
     columns[x].none?(&:nil?)
   end
 
+  def connect_four?(disc)
+    # placeholder
+  end
+
   private
 
   def create_board
@@ -31,6 +35,14 @@ class Board
       end
     end
     board_hash
+  end
+
+  def connect_four(subsection, disc)
+    connect = false
+    subsection.each_cons(4) do |cons4|
+      connect = true if cons4.all? { |slot| slot == disc }
+    end
+    connect
   end
 
   def columns
