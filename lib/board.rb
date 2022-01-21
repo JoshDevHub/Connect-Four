@@ -22,7 +22,7 @@ class Board
   end
 
   def connect_four?(disc)
-    # placeholder
+    columns.any? { |column| connect_four(column, disc) }
   end
 
   private
