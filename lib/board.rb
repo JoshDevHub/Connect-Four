@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'matrix'
 require 'pry-byebug'
 # class that represents the game board
 class Board
@@ -23,11 +22,28 @@ class Board
   end
 
   def connect_four?(disc)
-    (all_columns + all_rows).any? { |section| four_consecutive?(section, disc) }
+    all_conditions = (all_columns + all_rows + test_diagonal)
+    all_conditions.any? { |section| four_consecutive?(section, disc) }
   end
 
+  # TODO: Refactor
   def test_diagonal
-    # placeholder
+    origins = [[0, 0], [1, 0], [2, 0], [3, 0], [0, 1], [0, 2]]
+    diagonals = []
+    origins.each { |origin| diagonals << iterate_diagonal(origin) }
+  end
+
+  def iterate_diagonal(coordinate)
+    x, y = coordinate
+    y_max = all_rows.length - 1
+    x_max = all_rows[0].length - 1
+    results = []
+    until x > x_max || y > y_max
+      results << board_grid[[x, y]]
+      x += 1
+      y += 1
+    end
+    results
   end
 
   private
@@ -42,7 +58,6 @@ class Board
     board_hash
   end
 
-  # TODO: rename
   def four_consecutive?(subsection, disc)
     connect = false
     subsection.each_cons(4) do |cons4|
@@ -64,5 +79,3 @@ class Board
     all_rows.transpose
   end
 end
-
-p Board.new.test_diagonal
