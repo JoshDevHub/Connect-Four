@@ -22,7 +22,8 @@ class Board
   end
 
   def connect_four?(disc)
-    columns.any? { |column| connect_four(column, disc) }
+    columns.any? { |column| connect_four(column, disc) } ||
+      rows.any? { |row| connect_four(row, disc) }
   end
 
   private
@@ -37,6 +38,7 @@ class Board
     board_hash
   end
 
+  # TODO: rename
   def connect_four(subsection, disc)
     connect = false
     subsection.each_cons(4) do |cons4|
@@ -52,5 +54,14 @@ class Board
       column_coords << column
     end
     column_coords
+  end
+
+  def rows
+    row_coords = []
+    6.times do |i|
+      row = (0..6).to_a.product([i]).map { |ndx| board_grid[ndx] }
+      row_coords << row
+    end
+    row_coords
   end
 end
