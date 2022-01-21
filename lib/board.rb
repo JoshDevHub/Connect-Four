@@ -9,12 +9,17 @@ class Board
     @board_grid = create_board
   end
 
-  # TODO: column full?
   def place_disc(color, column)
-    x = column.to_i - 1
+    x = column.to_i - 1 # TODO: consider abstraction or placement?
     y = 0
     y += 1 until board_grid[[x, y]].nil?
     board_grid[[x, y]] = color
+  end
+
+  def column_full?(column)
+    x = column.to_i - 1
+    column_to_check = board_grid.keys.select { |key| key[0] == x }
+    column_to_check.none? { |coord| board_grid[coord].nil? }
   end
 
   private
