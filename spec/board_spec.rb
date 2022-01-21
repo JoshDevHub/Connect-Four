@@ -117,4 +117,25 @@ describe Board do # rubocop: disable Metrics/BlockLength
       end
     end
   end
+
+  describe '#connect_four?' do
+    context 'when there is no connect four' do
+      subject(:board_no_connect) { described_class.new }
+      before do
+        board_to_check = {
+          [0, 0]=>'red', [1, 0]=>'red', [2, 0]=>'red', [3, 0]=>'yellow', [4, 0]=>nil, [5, 0]=>nil, [6, 0]=>nil,
+          [0, 1]=>'yellow', [1, 1]=>'red', [2, 1]=>'yellow', [3, 1]=>'red', [4, 1]=>nil, [5, 1]=>nil, [6, 1]=>nil,
+          [0, 2]=>nil, [1, 2]=>'red', [2, 2]=>'red', [3, 2]=>nil, [4, 2]=>nil, [5, 2]=>nil, [6, 2]=>nil,
+          [0, 3]=>nil, [1, 3]=>'yellow', [2, 3]=>nil, [3, 3]=>nil, [4, 3]=>nil, [5, 3]=>nil, [6, 3]=>nil,
+          [0, 4]=>nil, [1, 4]=>nil, [2, 4]=>nil, [3, 4]=>nil, [4, 4]=>nil, [5, 4]=>nil, [6, 4]=>nil,
+          [0, 5]=>nil, [1, 5]=>nil, [2, 5]=>nil, [3, 5]=>nil, [4, 5]=>nil, [5, 5]=>nil, [6, 5]=>nil
+        }
+        board_no_connect.instance_variable_set(:@board_grid, board_to_check)
+      end
+      it "returns false when there's no connect four on the board for red" do
+        color = 'red'
+        expect(board_no_connect.connect_four?(color)).to be(false)
+      end
+    end
+  end
 end
