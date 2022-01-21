@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'matrix'
 require 'pry-byebug'
 # class that represents the game board
 class Board
@@ -18,11 +19,11 @@ class Board
 
   def column_full?(column)
     x = column.to_i - 1
-    columns[x].none?(&:nil?)
+    all_columns[x].none?(&:nil?)
   end
 
   def connect_four?(disc)
-    (columns + rows).any? { |section| four_consecutive?(section, disc) }
+    (all_columns + all_rows).any? { |section| four_consecutive?(section, disc) }
   end
 
   def test_diagonal
@@ -50,22 +51,17 @@ class Board
     connect
   end
 
-  def columns
-    column_coords = []
-    7.times do |i|
-      column = [i].product((0..5).to_a).map { |ndx| board_grid[ndx] }
-      column_coords << column
-    end
-    column_coords
-  end
-
-  def rows
+  def all_rows
     row_coords = []
     6.times do |i|
       row = (0..6).to_a.product([i]).map { |ndx| board_grid[ndx] }
       row_coords << row
     end
     row_coords
+  end
+
+  def all_columns
+    all_rows.transpose
   end
 end
 
