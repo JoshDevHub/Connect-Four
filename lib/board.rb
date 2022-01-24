@@ -27,9 +27,10 @@ class Board
   end
 
   def to_s
-    board_array = board_grid.values.map { |position| position.nil? ? '.' : position }
+    board_array = all_rows.reverse.flatten.map { |position| position.nil? ? '..' : position }
+    row_separator = '|----+----+----+----+----+----+----|'
     board_string = ''
-    board_array.each_slice(7) { |row| board_string += "| #{row.join(' | ')} |\n" }
+    board_array.each_slice(7) { |row| board_string += "| #{row.join(' | ')} |\n#{row_separator}\n" }
     board_string
   end
 
