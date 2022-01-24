@@ -22,29 +22,8 @@ class Board
   end
 
   def connect_four?(disc)
-    all_conditions = (all_columns + all_rows + test_diagonal)
+    all_conditions = (all_columns + all_rows + main_diagonals)
     all_conditions.any? { |section| four_consecutive?(section, disc) }
-  end
-
-  # TODO: Refactor
-  def test_diagonal
-    origins = [[0, 0], [1, 0], [2, 0], [3, 0], [0, 1], [0, 2]]
-    diagonals = []
-    origins.each { |origin| diagonals << iterate_diagonal(origin) }
-    diagonals
-  end
-
-  def iterate_diagonal(coordinate)
-    x, y = coordinate
-    y_max = all_rows.length - 1
-    x_max = all_rows[0].length - 1
-    results = []
-    until x > x_max || y > y_max
-      results << board_grid[[x, y]]
-      x += 1
-      y += 1
-    end
-    results
   end
 
   def to_s
@@ -85,5 +64,25 @@ class Board
 
   def all_columns
     all_rows.transpose
+  end
+
+  def traverse_diagonally(coordinate)
+    x, y = coordinate
+    y_max = all_rows.length - 1
+    x_max = all_rows[0].length - 1
+    results = []
+    until x > x_max || y > y_max
+      results << board_grid[[x, y]]
+      x += 1
+      y += 1
+    end
+    results
+  end
+
+  def main_diagonals
+    origins = [[0, 0], [1, 0], [2, 0], [3, 0], [0, 1], [0, 2]]
+    diagonals = []
+    origins.each { |origin| diagonals << traverse_diagonally(origin) }
+    diagonals
   end
 end
