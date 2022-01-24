@@ -4,6 +4,11 @@ require_relative 'display'
 # class that holds logic for the game's players
 class Player
   include Display
+  attr_reader :disc
+
+  def initialize(disc_token)
+    @disc = disc_token
+  end
 
   def user_selection
     selection = take_input
