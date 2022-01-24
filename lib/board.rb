@@ -22,7 +22,7 @@ class Board
   end
 
   def connect_four?(disc)
-    all_conditions = (all_columns + all_rows + main_diagonals)
+    all_conditions = (all_columns + all_rows + main_diagonals + anti_diagonals)
     all_conditions.any? { |section| four_consecutive?(section, disc) }
   end
 
@@ -67,14 +67,14 @@ class Board
     all_rows.transpose
   end
 
-  def traverse_diagonally(coordinate)
+  def traverse_diagonally(coordinate, direction)
     x, y = coordinate
     y_max = all_rows.length - 1
-    x_max = all_rows[0].length - 1
+    x_max = all_rows.first.length - 1
     results = []
     until x > x_max || y > y_max
       results << board_grid[[x, y]]
-      x += 1
+      direction == 'main' ? x += 1 : x -= 1
       y += 1
     end
     results
@@ -83,7 +83,14 @@ class Board
   def main_diagonals
     origins = [[0, 0], [1, 0], [2, 0], [3, 0], [0, 1], [0, 2]]
     diagonals = []
-    origins.each { |origin| diagonals << traverse_diagonally(origin) }
+    origins.each { |origin| diagonals << traverse_diagonally(origin, 'main') }
+    diagonals
+  end
+
+  def anti_diagonals
+    origins = [[3, 0], [4, 0], [5, 0], [6, 0], [6, 1], [6, 2]]
+    diagonals = []
+    origins.each { |origin| diagonals << traverse_diagonally(origin, 'anti') }
     diagonals
   end
 end
