@@ -51,7 +51,6 @@ describe Board do # rubocop: disable Metrics/BlockLength
         column = '1'
         coordinate = [0, 4]
         board.place_disc(red_disc, column)
-        puts board.to_s
         expect(board.board_grid[coordinate]).to eq(red_disc)
       end
     end
