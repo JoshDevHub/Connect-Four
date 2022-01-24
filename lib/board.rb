@@ -9,6 +9,9 @@ class Board
     @board_grid = create_board
   end
 
+  WIDTH = 7
+  HEIGHT = 6
+
   def place_disc(color, column)
     x = column.to_i - 1 # TODO: consider abstraction or placement?
     y = 0
@@ -30,7 +33,7 @@ class Board
     board_array = all_rows.reverse.flatten.map { |position| position.nil? ? '..' : position }
     row_separator = '|----+----+----+----+----+----+----|'
     board_string = ''
-    board_array.each_slice(7) { |row| board_string += "| #{row.join(' | ')} |\n#{row_separator}\n" }
+    board_array.each_slice(WIDTH) { |row| board_string += "| #{row.join(' | ')} |\n#{row_separator}\n" }
     board_string
   end
 
@@ -38,8 +41,8 @@ class Board
 
   def create_board
     board_hash = {}
-    6.times do |y|
-      7.times do |x|
+    HEIGHT.times do |y|
+      WIDTH.times do |x|
         board_hash[[x, y]] = nil
       end
     end
@@ -56,8 +59,8 @@ class Board
 
   def all_rows
     row_coords = []
-    6.times do |i|
-      row = (0..6).to_a.product([i]).map { |ndx| board_grid[ndx] }
+    HEIGHT.times do |i|
+      row = (0..HEIGHT).to_a.product([i]).map { |ndx| board_grid[ndx] }
       row_coords << row
     end
     row_coords
@@ -67,14 +70,12 @@ class Board
     all_rows.transpose
   end
 
-  def traverse_diagonally(coordinate, direction)
+  def traverse_diagonally(coordinate, main:)
     x, y = coordinate
-    y_max = all_rows.length - 1
-    x_max = all_rows.first.length - 1
     results = []
-    until x > x_max || y > y_max
+    until x >= WIDTH || y >= HEIGHT
       results << board_grid[[x, y]]
-      direction == 'main' ? x += 1 : x -= 1
+      main ? x += 1 : x -= 1
       y += 1
     end
     results
@@ -83,14 +84,14 @@ class Board
   def main_diagonals
     origins = [[0, 0], [1, 0], [2, 0], [3, 0], [0, 1], [0, 2]]
     diagonals = []
-    origins.each { |origin| diagonals << traverse_diagonally(origin, 'main') }
+    origins.each { |origin| diagonals << traverse_diagonally(origin, main: true) }
     diagonals
   end
 
   def anti_diagonals
     origins = [[3, 0], [4, 0], [5, 0], [6, 0], [6, 1], [6, 2]]
     diagonals = []
-    origins.each { |origin| diagonals << traverse_diagonally(origin, 'anti') }
+    origins.each { |origin| diagonals << traverse_diagonally(origin, main: false) }
     diagonals
   end
 end
