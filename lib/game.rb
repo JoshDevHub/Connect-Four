@@ -2,6 +2,7 @@
 
 require_relative 'display'
 require_relative 'board'
+require_relative 'player'
 
 # class holding logic for running connect 4 games
 class Game
@@ -15,7 +16,17 @@ class Game
   end
 
   def play_game
-    # placeholder
+    puts introduction
+    loop do
+      until game_over?
+        game_loop(player_one)
+        game_loop(player_two)
+      end
+      break unless play_again?
+
+      reset_game
+    end
+    print_board(game_board.to_s)
     # introduction & rules
     # loop start
     # -> player query
@@ -31,7 +42,18 @@ class Game
 
   private
 
+  def game_over?
+    game_board.connect_four? || game_board.full?
+  end
+
   def reset_game
     @game_board = game_board.new
   end
 end
+
+game = Game.new(
+  game_board: Board.new,
+  player_one: Player.new('🟡'),
+  player_two: Player.new('🔴')
+)
+game.play_game
