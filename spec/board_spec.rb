@@ -210,8 +210,8 @@ describe Board do # rubocop: disable Metrics/BlockLength
   end
 
   describe '#full_board?' do
-    subject(:game_board) { described_class.new }
     context 'when the board is not full' do
+      subject(:non_full_board) { described_class.new }
       before do
         partially_full_board = {
           [0, 0]=>nil, [1, 0]=>nil, [2, 0]=>nil, [3, 0]=>yellow_disc, [4, 0]=>nil, [5, 0]=>nil, [6, 0]=>nil,
@@ -221,13 +221,14 @@ describe Board do # rubocop: disable Metrics/BlockLength
           [0, 4]=>nil, [1, 4]=>nil, [2, 4]=>nil, [3, 4]=>nil, [4, 4]=>nil, [5, 4]=>nil, [6, 4]=>nil,
           [0, 5]=>nil, [1, 5]=>nil, [2, 5]=>nil, [3, 5]=>nil, [4, 5]=>nil, [5, 5]=>nil, [6, 5]=>nil
         }
-        game_board.instance_variable_set(:@board_grid, partially_full_board)
+        non_full_board.instance_variable_set(:@board_grid, partially_full_board)
       end
       it 'returns false' do
-        expect(game_board.full?).to be(false)
+        expect(non_full_board.full_board?).to be(false)
       end
     end
     context 'when the board is full' do
+      subject(:filled_board) { described_class.new }
       before do
         full_board = {
           [0, 0]=>red_disc, [1, 0]=>red_disc, [2, 0]=>red_disc, [3, 0]=>yellow_disc, [4, 0]=>red_disc, [5, 0]=>red_disc, [6, 0]=>red_disc,
@@ -237,10 +238,11 @@ describe Board do # rubocop: disable Metrics/BlockLength
           [0, 4]=>red_disc, [1, 4]=>red_disc, [2, 4]=>red_disc, [3, 4]=>red_disc, [4, 4]=>red_disc, [5, 4]=>red_disc, [6, 4]=>red_disc,
           [0, 5]=>red_disc, [1, 5]=>red_disc, [2, 5]=>red_disc, [3, 5]=>red_disc, [4, 5]=>red_disc, [5, 5]=>red_disc, [6, 5]=>red_disc
         }
+        filled_board.instance_variable_set(:@board_grid, full_board)
       end
-    end
-    it 'returns true' do
-      expect(game_board.full?).to be(true)
+      it 'returns true' do
+        expect(filled_board.full_board?).to be(true)
+      end
     end
   end
 end
