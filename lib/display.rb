@@ -10,7 +10,14 @@ module Display
       This row can occur on rows, columns, and diagonals. Player 1 will use the
       yellow discs, and Player 2 will use the red discs. Press Enter to start the game >>
     HEREDOC
-    gets.chomp
+    gets
+  end
+
+  def print_board(board_string)
+    column_labels = '  1    2    3    4    5    6    7  '
+    puts column_labels
+    puts board_string
+    puts column_labels
   end
 
   def query_message(message)
