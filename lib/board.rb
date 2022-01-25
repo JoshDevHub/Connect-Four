@@ -29,6 +29,10 @@ class Board
     all_conditions.any? { |section| four_consecutive?(section, disc) }
   end
 
+  def full_board?
+    all_rows.none? { |row| row.include?(nil) }
+  end
+
   def to_s
     board_array = all_rows.reverse.flatten.map { |position| position.nil? ? '..' : position }
     row_separator = '|----+----+----+----+----+----+----|'
