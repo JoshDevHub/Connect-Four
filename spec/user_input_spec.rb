@@ -11,7 +11,6 @@ describe UserInput do
       context 'when the user input is Y' do
         before do
           input = 'y'
-          # allow(dummy_class).to receive(:error_message).and_return(error_message)
           allow(dummy_class).to receive(:gets).and_return(input)
         end
 
