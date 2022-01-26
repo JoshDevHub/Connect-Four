@@ -10,7 +10,6 @@ module UserInput
     lambda do |input|
       if %w[y n].none?(input)
         puts error_message(:not_yn)
-        false
       else
         true
       end
