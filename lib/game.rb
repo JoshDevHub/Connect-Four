@@ -48,11 +48,10 @@ module ConnectFour
 
     def column_validator
       lambda do |input|
-        if game_board.column_full?(input)
-          puts error_message(:column_full)
-          false
-        elsif ('1'..'7').none?(input)
+        if ('1'..'7').none?(input)
           puts error_message(:not_in_range)
+        elsif game_board.column_full?(input)
+          puts error_message(:column_full)
         else
           true
         end
