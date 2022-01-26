@@ -42,5 +42,18 @@ describe UserInput do
         dummy_class.give_yes_no_input
       end
     end
+    context 'when the user input is invalid three times and then valid' do
+      before do
+        symbol = ']'
+        number = '2'
+        invalid_letter = 'z'
+        valid_input = 'n'
+        allow(dummy_class).to receive(:gets).and_return(symbol, number, invalid_letter, valid_input)
+      end
+      it 'returns and error message three times' do
+        expect(dummy_class).to receive(:puts).with(error_message).exactly(3).times
+        dummy_class.give_yes_no_input
+      end
+    end
   end
 end
