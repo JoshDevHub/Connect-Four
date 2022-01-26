@@ -9,7 +9,7 @@ module UserInput
   def yes_no_validator
     lambda do |input|
       if %w[y n].none?(input)
-        error_message(:not_yn)
+        puts error_message(:not_yn)
         false
       else
         true
