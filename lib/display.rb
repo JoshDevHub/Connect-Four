@@ -30,6 +30,7 @@ module Display
   def error_message(message)
     {
       not_in_range: 'That input is not in the range of columns you can place your piece in. Try again.',
+      column_full: 'That column is already filled! Please choose a different one',
       not_yn: "Please only use 'Y' or 'N' to answer."
     }[message]
   end
