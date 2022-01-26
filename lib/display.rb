@@ -22,13 +22,15 @@ module Display
 
   def query_message(message)
     {
-      player_input: 'Which column would you like to place your piece in?'
+      player_input: 'Which column would you like to place your piece in?',
+      play_again: 'Would you like to play again? Y/n '
     }[message]
   end
 
   def error_message(message)
     {
-      not_in_range: 'That input is not in the range of columns you can place your piece in. Try again.'
+      not_in_range: 'That input is not in the range of columns you can place your piece in. Try again.',
+      not_yn: "Please only use 'Y' or 'N' to answer."
     }[message]
   end
 end
