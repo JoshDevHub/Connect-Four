@@ -1,29 +1,11 @@
 # frozen_string_literal: true
 
-require_relative 'display'
 # class that holds logic for the game's players
 class Player
-  include Display
-  attr_reader :disc
+  attr_reader :disc, :name
 
-  def initialize(disc_token)
+  def initialize(disc_token, name)
     @disc = disc_token
-  end
-
-  def user_selection
-    selection = take_input
-    return selection if valid_selection?(selection)
-
-    puts error_message(:not_in_range)
-    user_selection
-  end
-
-  def take_input
-    gets.chomp
-  end
-
-  def valid_selection?(selection)
-    valid_range = ('1'..'7')
-    valid_range.include?(selection)
+    @name = name
   end
 end
