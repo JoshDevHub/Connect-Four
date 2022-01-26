@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
+require_relative 'display'
+
 # module for managing user command line inputs
 module UserInput
+  include Display
+
   def give_yes_no_input
     validate_user_input(&yes_no_validator)
   end
