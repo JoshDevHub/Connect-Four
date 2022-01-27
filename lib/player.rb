@@ -8,4 +8,8 @@ class Player
     @disc = disc_token
     @name = name
   end
+
+  def to_s
+    name
+  end
 end
