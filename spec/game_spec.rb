@@ -54,6 +54,35 @@ describe ConnectFour::Game do # rubocop: disable Metrics/BlockLength
     # placeholder
   end
   describe '#play_again?' do
-    # placeholder
+    let(:game_board) { double('game_board') }
+    subject(:game) do
+      described_class.new(
+        player_one: player_one,
+        player_two: player_two,
+        game_board: game_board
+      )
+    end
+    context 'when the user input is valid' do
+      context "when the user input is 'y'" do
+        before do
+          allow(game).to receive(:puts)
+          user_input = 'y'
+          allow(game).to receive(:gets).and_return(user_input)
+        end
+        it 'returns true' do
+          expect(game.play_again?).to be(true)
+        end
+      end
+      context "when the user input is 'n'" do
+        before do
+          allow(game).to receive(:puts)
+          user_input = 'n'
+          allow(game).to receive(:gets).and_return(user_input)
+        end
+        it 'returns false' do
+          expect(game.play_again?).to be(false)
+        end
+      end
+    end
   end
 end
