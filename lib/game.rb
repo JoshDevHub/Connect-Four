@@ -6,7 +6,9 @@ require_relative 'player'
 require_relative 'user_input'
 require 'pry-byebug'
 
+# module wrapper for Game Logic
 module ConnectFour
+  # class to hold logic of running a game of Connect Four
   class Game
     include Display
     include UserInput
