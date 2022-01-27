@@ -2,7 +2,7 @@
 
 require_relative '../lib/game'
 
-describe ConnectFour::Game do # rubocop: disable Metrics/BlockLength
+describe ConnectFour::Game do
   let(:player_one) { double(name: 'Player 1', disc: '🟡') }
   let(:player_two) { double(name: 'Player 2', disc: '🔴') }
   describe '#play_game' do
