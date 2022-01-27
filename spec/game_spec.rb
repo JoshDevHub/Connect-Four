@@ -84,5 +84,16 @@ describe ConnectFour::Game do
         end
       end
     end
+    context 'when the user input is invalid once' do
+      before do
+        allow(game).to receive(:puts)
+        invalid_input = 'l'
+        valid_input = 'y'
+        allow(game).to receive(:gets).and_return(invalid_input, valid_input)
+      end
+      it "returns true with valid 'y' input" do
+        expect(game.play_again?).to be(true)
+      end
+    end
   end
 end
