@@ -38,6 +38,13 @@ module ConnectFour
       end
     end
 
+    def play_again?
+      reset_game
+      puts query_message(:play_again)
+      response = give_yes_no_input
+      response == 'y'
+    end
+
     private
 
     def setup_game
@@ -69,13 +76,6 @@ module ConnectFour
         @game_over = true
         puts 'This game is a draw.'
       end
-    end
-
-    def play_again?
-      reset_game
-      puts query_message(:play_again)
-      response = give_yes_no_input
-      response == 'y'
     end
 
     def reset_game
