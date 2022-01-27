@@ -69,15 +69,16 @@ module ConnectFour
       end
     end
 
-    def reset_game
-      @game_board = game_board.new
-      @game_over = false
-    end
-
     def play_again?
+      reset_game
       puts query_message(:play_again)
       response = give_yes_no_input
       response == 'y'
+    end
+
+    def reset_game
+      @game_board = game_board.class.new
+      @game_over = false
     end
   end
 
