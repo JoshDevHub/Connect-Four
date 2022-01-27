@@ -19,7 +19,7 @@ module ConnectFour
     end
 
     def play_game
-      puts introduction
+      setup_game
       loop do
         current_player = player_one
         loop do
@@ -33,6 +33,10 @@ module ConnectFour
     end
 
     private
+
+    def setup_game
+      puts introduction
+    end
 
     def game_loop(player)
       print_board(game_board.to_s)
