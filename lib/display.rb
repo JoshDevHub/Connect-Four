@@ -13,10 +13,10 @@ module Display
     gets
   end
 
-  def print_board(board_string)
+  def print_board(board)
     column_labels = '  1    2    3    4    5    6    7  '
     puts column_labels
-    puts board_string
+    puts board
     puts column_labels
   end
 

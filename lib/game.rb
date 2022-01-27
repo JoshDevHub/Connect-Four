@@ -61,7 +61,7 @@ module ConnectFour
     def check_game_over(player)
       if game_board.connect_four?(player.disc)
         @game_over = true
-        print_board(game_board.to_s)
+        print_board(game_board)
         puts "#{player.name} has won the game!"
       elsif game_board.full_board?
         @game_over = true
