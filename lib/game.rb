@@ -21,13 +21,7 @@ module ConnectFour
     def play_game
       setup_game
       loop do
-        current_player = player_one
-        loop do
-          game_loop(current_player)
-          break if @game_over
-
-          current_player = current_player == player_one ? player_two : player_one
-        end
+        game_loop
         break unless play_again?
       end
     end
@@ -38,12 +32,16 @@ module ConnectFour
       puts introduction
     end
 
-    def game_loop(player)
-      print_board(game_board.to_s)
-      puts query_message(:player_input)
-      player_choice = column_selection
-      game_board.place_disc(player.disc, player_choice)
-      check_game_over(player)
+    def game_loop
+      current_player = player_one
+      until @game_over
+        print_board(game_board)
+        puts "#{current_player}: #{query_message(:player_input)}"
+        player_choice = column_selection
+        game_board.place_disc(current_player.disc, player_choice)
+        check_game_over(current_player)
+        current_player = current_player == player_one ? player_two : player_one
+      end
     end
 
     def column_selection
@@ -66,7 +64,7 @@ module ConnectFour
       if game_board.connect_four?(player.disc)
         @game_over = true
         print_board(game_board)
-        puts "#{player.name} has won the game!"
+        puts "#{player} has won the game!"
       elsif game_board.full_board?
         @game_over = true
         puts 'This game is a draw.'
