@@ -26,12 +26,6 @@ module ConnectFour
       end
     end
 
-    private
-
-    def setup_game
-      puts introduction
-    end
-
     def game_loop
       current_player = player_one
       until @game_over
@@ -42,6 +36,12 @@ module ConnectFour
         check_game_over(current_player)
         current_player = current_player == player_one ? player_two : player_one
       end
+    end
+
+    private
+
+    def setup_game
+      puts introduction
     end
 
     def column_selection
