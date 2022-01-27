@@ -10,12 +10,13 @@ module ConnectFour
   class Game
     include Display
     include UserInput
-    attr_reader :game_board, :player_one, :player_two
+    attr_reader :game_board, :player_one, :player_two, :game_over
 
     def initialize(game_board:, player_one:, player_two:)
       @game_board = game_board
       @player_one = player_one
       @player_two = player_two
+      @game_over = false
     end
 
     def play_game
@@ -28,7 +29,7 @@ module ConnectFour
 
     def game_loop
       current_player = player_one
-      until @game_over
+      until game_over
         print_board(game_board)
         puts "#{current_player}: #{query_message(:player_input)}"
         player_choice = column_selection

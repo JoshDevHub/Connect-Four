@@ -51,7 +51,46 @@ describe ConnectFour::Game do
     end
   end
   describe '#game_loop' do
-    # placeholder
+    context 'when the game is over from connect four' do
+      let(:game_board) { double(column_full?: false, full_board?: false, place_disc: nil) }
+      subject(:connect_four_game) do
+        described_class.new(
+          player_one: player_one,
+          player_two: player_two,
+          game_board: game_board
+        )
+      end
+      before do
+        allow(game_board).to receive(:connect_four?).and_return(false, false, false, true)
+        allow(connect_four_game).to receive(:puts)
+        allow(connect_four_game).to receive_message_chain(:gets, :chomp).and_return('1')
+      end
+      it 'calls column_selection four times' do
+        expect(connect_four_game).to receive(:column_selection).exactly(4).times
+        connect_four_game.game_loop
+      end
+    end
+
+    context 'when the game is over from a full board' do
+      let(:game_board) { double(connect_four?: false, full_board?: false, place_disc: nil) }
+      subject(:full_board_game) do
+        described_class.new(
+          player_one: player_one,
+          player_two: player_two,
+          game_board: game_board
+        )
+      end
+      before do
+        full_board_returns = Array.new(41, false) << true
+        allow(game_board).to receive(:full_board?).and_return(*full_board_returns)
+        allow(full_board_game).to receive(:puts)
+        allow(full_board_game).to receive_message_chain(:gets, :chomp).and_return('1')
+      end
+      it 'calls column_selection forty-two times' do
+        expect(full_board_game).to receive(:column_selection).exactly(42).times
+        full_board_game.game_loop
+      end
+    end
   end
   describe '#play_again?' do
     let(:game_board) { double('game_board') }
