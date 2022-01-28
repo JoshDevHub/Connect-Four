@@ -20,10 +20,17 @@ module Display
     puts column_labels
   end
 
+  def print_discs(discs)
+    discs.each do |disc|
+      print "#{disc} "
+    end
+    puts "\n"
+  end
+
   def query_message(message)
     {
       player_name: 'What would you like your name to be?',
-      disc_choice: 'What would you like to be your disc color?',
+      disc_choice: 'What would your disc color to be?',
       player_input: 'Which column would you like to place your piece in?',
       play_again: 'Would you like to play again? Y/n '
     }[message]

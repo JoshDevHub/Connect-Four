@@ -42,6 +42,7 @@ class Player
   end
 
   def choose_disc
+    print_discs(DISCS.values)
     puts "#{name}, #{query_message(:disc_choice)}"
     disc_choice = validate_user_input(&disc_validator)
     self.class.add_choice(disc_choice)
