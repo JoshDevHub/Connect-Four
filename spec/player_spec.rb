@@ -12,8 +12,9 @@ describe Player do
         allow(josh_player).to receive(:gets).and_return(user_input)
       end
 
-      xit "sets name to be 'Josh'" do
-        expect { josh_player.input_name }.to change { josh_player.name }.to('Josh')
+      it "sets name to be 'Josh'" do
+        user_name = 'Josh'
+        expect { josh_player.input_name }.to change { josh_player.name }.to(user_name)
       end
     end
 
