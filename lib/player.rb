@@ -32,7 +32,7 @@ class Player
 
   def name_validator
     lambda do |input|
-      if /^[a-zA-Z]+$/.match?(input)
+      if /^[a-zA-Z]+$/.match?(input) && input.size < 20
         true
       else
         puts error_message(:invalid_name)
