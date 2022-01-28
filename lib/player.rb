@@ -2,7 +2,6 @@
 
 require_relative 'display'
 require_relative 'user_input'
-require 'pry-byebug'
 
 # class that holds logic for the game's players
 class Player
@@ -18,7 +17,6 @@ class Player
   end
 
   def initialize
-    # binding.pry
     @disc = nil
     @name = "Player #{self.class.count}"
   end
@@ -48,6 +46,8 @@ class Player
   def to_s
     name
   end
+
+  private
 
   def self.count
     @player_counter += 1
