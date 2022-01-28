@@ -105,8 +105,8 @@ describe ConnectFour::Game do
 
   describe '#check_game_over' do
     context 'when there is a connect four' do
-      let(:connect_four_board) { double(connect_four?: true) }
-      subject(:game) do
+      let(:connect_four_board) { double(connect_four?: true, full_board?: true) }
+      subject(:won_game) do
         described_class.new(
           player_one: player_one,
           player_two: player_two,
@@ -114,11 +114,29 @@ describe ConnectFour::Game do
         )
       end
       before do
-        allow(game).to receive(:puts)
+        allow(won_game).to receive(:puts)
       end
 
       it 'sets game_over to true' do
-        expect { game.check_game_over(player_one) }.to change { game.game_over }.to(true)
+        expect { won_game.check_game_over(player_one) }.to change { won_game.game_over }.to(true)
+      end
+    end
+
+    context 'when the board is full' do
+      let(:full_board) { double(connect_four?: false, full_board?: true) }
+      subject(:tie_game) do
+        described_class.new(
+          player_one: player_one,
+          player_two: player_two,
+          game_board: full_board
+        )
+      end
+      before do
+        allow(tie_game).to receive(:puts)
+      end
+
+      it 'sets game_over to true' do
+        expect { tie_game.check_game_over(player_one) }.to change { tie_game.game_over }.to(true)
       end
     end
   end
