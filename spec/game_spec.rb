@@ -104,39 +104,59 @@ describe ConnectFour::Game do
   end
 
   describe '#check_game_over' do
-    context 'when there is a connect four' do
-      let(:connect_four_board) { double(connect_four?: true, full_board?: true) }
-      subject(:won_game) do
-        described_class.new(
-          player_one: player_one,
-          player_two: player_two,
-          game_board: connect_four_board
-        )
-      end
-      before do
-        allow(won_game).to receive(:puts)
+    context 'when the game is over' do
+      context 'when there is a connect four' do
+        let(:connect_four_board) { double(connect_four?: true, full_board?: true) }
+        subject(:won_game) do
+          described_class.new(
+            player_one: player_one,
+            player_two: player_two,
+            game_board: connect_four_board
+          )
+        end
+        before do
+          allow(won_game).to receive(:puts)
+        end
+
+        it 'sets game_over to true' do
+          expect { won_game.check_game_over(player_one) }.to change { won_game.game_over }.to(true)
+        end
       end
 
-      it 'sets game_over to true' do
-        expect { won_game.check_game_over(player_one) }.to change { won_game.game_over }.to(true)
+      context 'when the board is full' do
+        let(:full_board) { double(connect_four?: false, full_board?: true) }
+        subject(:tie_game) do
+          described_class.new(
+            player_one: player_one,
+            player_two: player_two,
+            game_board: full_board
+          )
+        end
+        before do
+          allow(tie_game).to receive(:puts)
+        end
+
+        it 'sets game_over to true' do
+          expect { tie_game.check_game_over(player_one) }.to change { tie_game.game_over }.to(true)
+        end
       end
     end
 
-    context 'when the board is full' do
-      let(:full_board) { double(connect_four?: false, full_board?: true) }
-      subject(:tie_game) do
+    context 'when the game is not over' do
+      let(:partial_board) { double(connect_four?: false, full_board?: false) }
+      subject(:in_progress_game) do
         described_class.new(
           player_one: player_one,
           player_two: player_two,
-          game_board: full_board
+          game_board: partial_board
         )
       end
       before do
-        allow(tie_game).to receive(:puts)
+        allow(in_progress_game).to receive(:puts)
       end
 
-      it 'sets game_over to true' do
-        expect { tie_game.check_game_over(player_one) }.to change { tie_game.game_over }.to(true)
+      it 'keeps game_over falsy' do
+        expect { in_progress_game.check_game_over(player_one) }.not_to change { in_progress_game.game_over }
       end
     end
   end
