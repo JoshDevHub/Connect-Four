@@ -62,4 +62,28 @@ describe Player do
       end
     end
   end
+
+  describe '#choose_disc' do
+    context 'when the user picks a valid disc' do
+      subject(:blue_player) { described_class.new }
+      before do
+        allow(blue_player).to receive(:puts)
+        disc_choice = 'blue'
+        allow(blue_player).to receive(:gets).and_return(disc_choice)
+      end
+
+      it 'sets the disc to be blue' do
+        disc_choice = '🔵'
+        expect { blue_player.choose_disc }.to change { blue_player.disc }.to(disc_choice)
+      end
+    end
+
+    context 'when the user picks an invalid disc' do
+      # placholder
+    end
+
+    context "when the user picks a disc that's already been chosen" do
+      # placeholder
+    end
+  end
 end
