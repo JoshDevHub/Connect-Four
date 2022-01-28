@@ -3,47 +3,36 @@
 require_relative '../lib/player'
 
 describe Player do
-  subject(:player) { described_class.new }
-  describe '#user_selection' do
-    context 'when user input is valid' do
+  describe '#input_name' do
+    context "when the user inputs 'Josh'" do
+      subject(:josh_player) { described_class.new }
       before do
-        valid_input = '5'
-        allow(player).to receive(:gets).and_return(valid_input)
+        allow(josh_player).to receive(:puts)
+        user_input = 'Josh'
+        allow(josh_player).to receive(:gets).and_return(user_input)
       end
 
-      it 'displays no error message' do
-        error_message = 'That input is not in the range of columns you can place your piece in. Try again.'
-        expect(player).not_to receive(:puts).with(error_message)
-        player.user_selection
+      xit "sets name to be 'Josh'" do
+        expect { josh_player.input_name }.to change { josh_player.name }.to('Josh')
       end
     end
 
-    context 'when user inputs one invalid value, then a valid input' do
+    context "when the user inputs 'Amanda'" do
+      subject(:amanda_player) { described_class.new }
       before do
-        letter = 'b'
-        valid_input = '7'
-        allow(player).to receive(:gets).and_return(letter, valid_input)
+        allow(amanda_player).to receive(:puts)
+        user_input = 'Amanda'
+        allow(amanda_player).to receive(:gets).and_return(user_input)
       end
-
-      it 'displays error message once' do
-        error_message = 'That input is not in the range of columns you can place your piece in. Try again.'
-        expect(player).to receive(:puts).with(error_message).once
-        player.user_selection
+      xit "sets name to be 'Amanda'" do
+        # placeholder
       end
     end
 
-    context 'when user inputs two invalid values, then a valid input' do
-      before do
-        symbol = ']'
-        large_number = '9'
-        valid_input = '2'
-        allow(player).to receive(:gets).and_return(symbol, large_number, valid_input)
-      end
+    context 'when the user inputs an invalid name once' do
 
-      it 'displays error message twice' do
-        error_message = 'That input is not in the range of columns you can place your piece in. Try again.'
-        expect(player).to receive(:puts).with(error_message).twice
-        player.user_selection
+      xit "runs twice" do
+
       end
     end
   end
