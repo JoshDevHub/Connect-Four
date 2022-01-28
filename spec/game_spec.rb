@@ -3,8 +3,8 @@
 require_relative '../lib/game'
 
 describe ConnectFour::Game do
-  let(:player_one) { double(name: 'Player 1', disc: '🟡') }
-  let(:player_two) { double(name: 'Player 2', disc: '🔴') }
+  let(:player_one) { double(name: 'PlayerOne', disc: 'red', setup: nil) }
+  let(:player_two) { double(name: 'PlayerTwo', disc: 'yellow', setup: nil) }
 
   describe '#play_game' do
     let(:game_board) { double('game_board') }

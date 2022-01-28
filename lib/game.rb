@@ -63,6 +63,8 @@ module ConnectFour
 
     def setup_game
       puts introduction
+      player_one.setup
+      player_two.setup
     end
 
     def column_selection
@@ -90,8 +92,8 @@ module ConnectFour
   def self.play
     Game.new(
       game_board: Board.new,
-      player_one: Player.new('🟡', 'Player 1'),
-      player_two: Player.new('🔴', 'Player 2')
+      player_one: Player.new,
+      player_two: Player.new
     ).play_game
   end
 end
