@@ -94,7 +94,22 @@ describe Player do
     end
 
     context "when the user picks a disc that's already been chosen" do
-      # placeholder
+      let(:player_one) { described_class.new }
+      subject(:player_two) { described_class.new }
+      before do
+        player_one_disc = 'orange'
+        allow(player_one).to receive(:puts)
+        allow(player_one).to receive(:gets).and_return(player_one_disc)
+        valid_player_two_disc = 'purple'
+        allow(player_two).to receive(:puts)
+        allow(player_two).to receive(:gets).and_return(player_one_disc, valid_player_two_disc)
+      end
+
+      it 'sets the disc to the valid option' do
+        disc_choice = '🟣'
+        player_one.choose_disc
+        expect { player_two.choose_disc }.to change { player_two.disc }.to(disc_choice)
+      end
     end
   end
 end

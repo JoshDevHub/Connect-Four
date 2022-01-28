@@ -2,6 +2,7 @@
 
 require_relative 'display'
 require_relative 'user_input'
+require 'pry-byebug'
 
 # class that holds logic for the game's players
 class Player
@@ -10,8 +11,14 @@ class Player
   attr_reader :disc, :name
 
   @player_counter = 0
+  @chosen_discs = []
+
+  class << self
+    attr_reader :chosen_discs
+  end
 
   def initialize
+    # binding.pry
     @disc = nil
     @name = "Player #{self.class.count}"
   end
@@ -34,6 +41,7 @@ class Player
   def choose_disc
     puts "#{name}, #{query_message(:disc_choice)}"
     disc_choice = validate_user_input(&disc_validator)
+    self.class.add_choice(disc_choice)
     @disc = DISCS[disc_choice.to_sym]
   end
 
@@ -43,6 +51,10 @@ class Player
 
   def self.count
     @player_counter += 1
+  end
+
+  def self.add_choice(choice)
+    @chosen_discs << choice
   end
 
   def name_validator
@@ -57,7 +69,9 @@ class Player
 
   def disc_validator
     lambda do |input|
-      if DISCS.key?(input.to_sym)
+      if self.class.chosen_discs.include?(input)
+        puts error_message(:chosen_disc)
+      elsif DISCS.key?(input.to_sym)
         true
       else
         puts error_message(:invalid_disc)
