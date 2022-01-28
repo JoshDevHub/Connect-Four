@@ -79,7 +79,18 @@ describe Player do
     end
 
     context 'when the user picks an invalid disc' do
-      # placholder
+      subject(:incorrect_player) { described_class.new }
+      before do
+        allow(incorrect_player).to receive(:puts)
+        invalid_choice = 'sky-blue'
+        valid_choice = 'yellow'
+        allow(incorrect_player).to receive(:gets).and_return(invalid_choice, valid_choice)
+      end
+
+      it 'sets the disc to the valid option' do
+        disc_choice = '🟡'
+        expect { incorrect_player.choose_disc }.to change { incorrect_player.disc }.to(disc_choice)
+      end
     end
 
     context "when the user picks a disc that's already been chosen" do
