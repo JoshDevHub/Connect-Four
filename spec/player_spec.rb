@@ -24,15 +24,23 @@ describe Player do
         user_input = 'Amanda'
         allow(amanda_player).to receive(:gets).and_return(user_input)
       end
+
       xit "sets name to be 'Amanda'" do
-        # placeholder
+        expect { amanda_player.input_name }.to change { amanda_player.name }.to('Amanda')
       end
     end
 
     context 'when the user inputs an invalid name once' do
+      subject(:player) { described_class.new }
+      before do
+        allow(player).to receive(:puts)
+        invalid_input = '123'
+        valid_input = 'player'
+        allow(player).to receive(:gets).and_return(invalid_input, valid_input)
+      end
 
       xit "runs twice" do
-
+        expect(player).to receive(:gets).twice
       end
     end
   end
