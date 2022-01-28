@@ -23,6 +23,7 @@ module Display
   def query_message(message)
     {
       player_name: 'What would you like your name to be?',
+      disc_choice: 'What would you like to be your disc color?',
       player_input: 'Which column would you like to place your piece in?',
       play_again: 'Would you like to play again? Y/n '
     }[message]
@@ -33,7 +34,8 @@ module Display
       not_in_range: 'That input is not in the range of columns you can place your piece in. Try again.',
       column_full: 'That column is already filled! Please choose a different one',
       not_yn: "Please only use 'Y' or 'N' to answer.",
-      invalid_name: 'Please only use one word of alphabetical characters'
+      invalid_name: 'Please only use one word of alphabetical characters',
+      invalid_disc: 'Please enter a valid disc color. Name the color you want:'
     }[message]
   end
 end
