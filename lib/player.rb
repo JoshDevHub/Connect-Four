@@ -30,6 +30,11 @@ class Player
     purple: '🟣'
   }.freeze
 
+  def setup
+    input_name
+    choose_disc
+  end
+
   def input_name
     puts "#{name}, #{query_message(:player_name)}"
     user_name = validate_user_input(&name_validator)
