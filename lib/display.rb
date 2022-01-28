@@ -21,10 +21,9 @@ module Display
   end
 
   def print_discs(discs)
-    discs.each do |disc|
-      print "#{disc} "
-    end
-    puts "\n"
+    disc_string = ''
+    discs.each { |disc| disc_string += "#{disc}  " }
+    puts disc_string + "\n\n"
   end
 
   def query_message(message)
