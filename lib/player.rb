@@ -75,6 +75,7 @@ class Player
 
   def disc_validator
     lambda do |input|
+      input.downcase!
       if self.class.chosen_discs.include?(input)
         puts error_message(:chosen_disc)
       elsif DISCS.key?(input.to_sym)

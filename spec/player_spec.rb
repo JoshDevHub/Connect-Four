@@ -80,16 +80,16 @@ describe Player do
       end
 
       context 'when the user spells the disk with variable casing' do
-        subject(:orange_player) { described_class.new }
+        subject(:red_player) { described_class.new }
         before do
-          allow(orange_player).to receive(:puts)
-          disc_choice = 'Orange'
-          allow(orange_player).to receive(:gets).and_return(disc_choice)
+          allow(red_player).to receive(:puts)
+          disc_choice = 'Red'
+          allow(red_player).to receive(:gets).and_return(disc_choice)
         end
 
         it 'sets the disc to be orange' do
-          disc_choice = '🟠'
-          expect { orange_player.choose_disc }.to change { orange_player.disc }.to(disc_choice)
+          disc_choice = '🔴'
+          expect { red_player.choose_disc }.to change { red_player.disc }.to(disc_choice)
         end
       end
     end
