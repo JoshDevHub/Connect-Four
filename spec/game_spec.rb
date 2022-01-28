@@ -103,6 +103,26 @@ describe ConnectFour::Game do
     end
   end
 
+  describe '#check_game_over' do
+    context 'when there is a connect four' do
+      let(:connect_four_board) { double(connect_four?: true) }
+      subject(:game) do
+        described_class.new(
+          player_one: player_one,
+          player_two: player_two,
+          game_board: connect_four_board
+        )
+      end
+      before do
+        allow(game).to receive(:puts)
+      end
+
+      it 'sets game_over to true' do
+        expect { game.check_game_over(player_one) }.to change { game.game_over }.to(true)
+      end
+    end
+  end
+
   describe '#play_again?' do
     let(:game_board) { double('game_board') }
     subject(:game) do
