@@ -76,7 +76,7 @@ describe Board do
       before do
         board_column_space.instance_variable_set(:@board_grid, partial_board)
       end
-      xit "returns false when column 3 isn't full" do
+      it "returns false when column 3 isn't full" do
         column = '3'
         expect(board_column_space.column_full?(column)).to be(false)
       end
@@ -94,7 +94,7 @@ describe Board do
         ]
         board_full_column.instance_variable_set(:@board_grid, board_with_full_col)
       end
-      xit 'returns true when column 2 is full' do
+      it 'returns true when column 2 is full' do
         column = '2'
         expect(board_full_column.column_full?(column)).to be(true)
       end

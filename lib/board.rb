@@ -71,7 +71,7 @@ class Board
   end
 
   def all_columns
-    all_rows.transpose
+    board_grid.transpose
   end
 
   def traverse_diagonally(coordinate, main:)
