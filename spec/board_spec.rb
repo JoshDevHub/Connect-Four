@@ -1,4 +1,4 @@
-# frozen_string_lxiteral: true
+# frozen_string_literal: true
 
 require_relative '../lib/board'
 
@@ -22,14 +22,16 @@ describe Board do
       context 'when the color is red' do
         it 'places a red disc in column 1 of the board' do
           column = '1'
-          expected_x, expected_y = [0, 0]
+          expected_x = 0
+          expected_y = 0
           board.place_disc(red_disc, column)
           expect(board.board_grid[expected_y][expected_x]).to eq(red_disc)
         end
 
         it 'places a red disc in column 5 of the board' do
           column = '5'
-          expected_x, expected_y = [4, 0]
+          expected_x = 4
+          expected_y = 0
           board.place_disc(red_disc, column)
           expect(board.board_grid[expected_y][expected_x]).to eq(red_disc)
         end
@@ -38,7 +40,8 @@ describe Board do
       context 'when the color is yellow' do
         it 'places a yellow disc in column 3 of the board' do
           column = '3'
-          expected_x, expected_y = [2, 0]
+          expected_x = 2
+          expected_y = 0
           board.place_disc(yellow_disc, column)
           expect(board.board_grid[expected_y][expected_x]).to eq(yellow_disc)
         end
@@ -51,7 +54,8 @@ describe Board do
       end
       it 'places a red disc in column 1' do
         column = '1'
-        expected_x, expected_y = [0, 2]
+        expected_x = 0
+        expected_y = 2
         board.place_disc(red_disc, column)
         expect(board.board_grid[expected_y][expected_x]).to eq(red_disc)
       end
@@ -63,7 +67,8 @@ describe Board do
       end
       it 'places a yellow disc in column 4' do
         column = '4'
-        expected_x, expected_y = [3, 2]
+        expected_x = 3
+        expected_y = 2
         board.place_disc(yellow_disc, column)
         expect(board.board_grid[expected_y][expected_x]).to eq(yellow_disc)
       end
@@ -219,7 +224,6 @@ describe Board do
   describe '#in_range?' do
     subject(:game_board) { described_class.new }
     context 'when the input is in range' do
-
       it 'returns true' do
         input = '5'
         expect(game_board.in_range?(input)).to be(true)
@@ -227,7 +231,6 @@ describe Board do
     end
 
     context 'when the input is out of range' do
-
       it 'returns false' do
         input = '11'
         expect(game_board.in_range?(input)).to be(false)
