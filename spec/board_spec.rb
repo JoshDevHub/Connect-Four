@@ -149,7 +149,7 @@ describe Board do
         end
       end
 
-      context 'when the connect four is on a main diagonal' do
+      context 'when the connect four is on an anti diagonal' do
         subject(:board_main_connect) { described_class.new }
         before do
           board_with_connect = [
@@ -167,7 +167,7 @@ describe Board do
         end
       end
 
-      context 'when the connect four is on an anti-diagonal' do
+      context 'when the connect four is on a main diagonal' do
         subject(:board_anti_connect) { described_class.new }
         before do
           board_with_connect = [

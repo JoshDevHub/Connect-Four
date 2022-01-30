@@ -25,7 +25,7 @@ class Board
   end
 
   def connect_four?(disc)
-    all_conditions = (board_grid + all_columns + main_diagonals + anti_diagonals)
+    all_conditions = (board_grid + all_columns + diagonals + diagonals(main: false))
     all_conditions.any? { |section| four_consecutive?(section, disc) }
   end
 
@@ -34,7 +34,7 @@ class Board
   end
 
   def to_s
-    board_array = all_rows.reverse.flatten.map { |position| position.nil? ? '..' : position }
+    board_array = board_grid.reverse.flatten.map { |position| position.nil? ? '..' : position }
     row_separator = '|----+----+----+----+----+----+----|'
     board_string = ''
     board_array.each_slice(WIDTH) { |row| board_string += "| #{row.join(' | ')} |\n#{row_separator}\n" }
@@ -55,28 +55,30 @@ class Board
     board_grid.transpose
   end
 
-  def traverse_diagonally(coordinate, grid = board_grid)
+  def get_diagonal_lines(coordinate, grid)
     x, y = coordinate
     results = []
     until x >= WIDTH || y >= HEIGHT
-      results << grid[y][x]
+      results.push(grid[y][x])
       x += 1
       y += 1
     end
     results
   end
 
-  def main_diagonals
-    origins = [[0, 0], [1, 0], [2, 0], [3, 0], [0, 1], [0, 2]]
-    diagonals = []
-    origins.each { |origin| diagonals << traverse_diagonally(origin) }
-    diagonals
+  def diagonals(main: true)
+    grid = main ? board_grid.map(&:reverse) : board_grid
+    diagonal_lines = []
+    diagonal_origins.each { |origin| diagonal_lines << get_diagonal_lines(origin, grid) }
+    diagonal_lines
   end
 
-  def anti_diagonals
-    origins = [[0, 0], [1, 0], [2, 0], [3, 0], [0, 1], [0, 2]]
-    diagonals = []
-    origins.each { |origin| diagonals << traverse_diagonally(origin, board_grid.map(&:reverse)) }
-    diagonals
+  def diagonal_origins
+    origins = []
+    x_max = WIDTH - 4
+    y_max = HEIGHT - 4
+    (0..x_max).each { |x| origins << [x, 0] }
+    (1..y_max).each { |y| origins << [0, y] }
+    origins
   end
 end
