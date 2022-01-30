@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'pry-byebug'
 # class that represents the game board
 class Board
   attr_reader :board_grid
@@ -17,6 +16,11 @@ class Board
     y = 0
     y += 1 until board_grid[y][x].nil?
     board_grid[y][x] = disc
+  end
+
+  def in_range?(position)
+    column = position.to_i - 1
+    (0..WIDTH).include?(column)
   end
 
   def column_full?(column)

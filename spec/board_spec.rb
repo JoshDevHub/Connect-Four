@@ -215,4 +215,23 @@ describe Board do
       end
     end
   end
+
+  describe '#in_range?' do
+    subject(:game_board) { described_class.new }
+    context 'when the input is in range' do
+
+      it 'returns true' do
+        input = '5'
+        expect(game_board.in_range?(input)).to be(true)
+      end
+    end
+
+    context 'when the input is out of range' do
+
+      it 'returns false' do
+        input = '11'
+        expect(game_board.in_range?(input)).to be(false)
+      end
+    end
+  end
 end
