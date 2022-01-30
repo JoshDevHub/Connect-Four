@@ -30,7 +30,7 @@ class Board
   end
 
   def full_board?
-    all_rows.none? { |row| row.include?(nil) }
+    board_grid.none? { |row| row.include?(nil) }
   end
 
   def to_s

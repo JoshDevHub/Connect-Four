@@ -193,24 +193,24 @@ describe Board do
       before do
         non_full_board.instance_variable_set(:@board_grid, partial_board)
       end
-      xit 'returns false' do
+      it 'returns false' do
         expect(non_full_board.full_board?).to be(false)
       end
     end
     context 'when the board is full' do
       subject(:filled_board) { described_class.new }
       before do
-        full_board = {
-          [0, 0] => red_disc, [1, 0] => red_disc, [2, 0] => red_disc, [3, 0] => yellow_disc, [4, 0] => red_disc, [5, 0] => red_disc, [6, 0] => red_disc,
-          [0, 1] => red_disc, [1, 1] => red_disc, [2, 1] => red_disc, [3, 1] => red_disc, [4, 1] => red_disc, [5, 1] => red_disc, [6, 1] => red_disc,
-          [0, 2] => red_disc, [1, 2] => red_disc, [2, 2] => red_disc, [3, 2] => red_disc, [4, 2] => red_disc, [5, 2] => red_disc, [6, 2] => red_disc,
-          [0, 3] => red_disc, [1, 3] => red_disc, [2, 3] => red_disc, [3, 3] => red_disc, [4, 3] => red_disc, [5, 3] => red_disc, [6, 3] => red_disc,
-          [0, 4] => red_disc, [1, 4] => red_disc, [2, 4] => red_disc, [3, 4] => red_disc, [4, 4] => red_disc, [5, 4] => red_disc, [6, 4] => red_disc,
-          [0, 5] => red_disc, [1, 5] => red_disc, [2, 5] => red_disc, [3, 5] => red_disc, [4, 5] => red_disc, [5, 5] => red_disc, [6, 5] => red_disc
-        }
+        full_board = [
+          [red_disc, red_disc, red_disc, red_disc, red_disc, red_disc, red_disc],
+          [red_disc, red_disc, red_disc, red_disc, red_disc, red_disc, red_disc],
+          [red_disc, red_disc, red_disc, red_disc, red_disc, red_disc, red_disc],
+          [red_disc, red_disc, red_disc, red_disc, red_disc, red_disc, red_disc],
+          [red_disc, red_disc, red_disc, red_disc, red_disc, red_disc, red_disc],
+          [red_disc, red_disc, red_disc, red_disc, red_disc, red_disc, red_disc]
+        ]
         filled_board.instance_variable_set(:@board_grid, full_board)
       end
-      xit 'returns true' do
+      it 'returns true' do
         expect(filled_board.full_board?).to be(true)
       end
     end
