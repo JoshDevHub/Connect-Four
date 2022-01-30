@@ -6,14 +6,14 @@ describe Board do
   let(:red_disc) { '🔴' }
   let(:yellow_disc) { '🟡' }
   let(:partial_board) do
-    {
-      [0, 0] => red_disc, [1, 0] => red_disc, [2, 0] => red_disc, [3, 0] => yellow_disc, [4, 0] => nil, [5, 0] => nil, [6, 0] => nil,
-      [0, 1] => yellow_disc, [1, 1] => red_disc, [2, 1] => yellow_disc, [3, 1] => red_disc, [4, 1] => nil, [5, 1] => nil, [6, 1] => nil,
-      [0, 2] => nil, [1, 2] => red_disc, [2, 2] => red_disc, [3, 2] => nil, [4, 2] => nil, [5, 2] => nil, [6, 2] => nil,
-      [0, 3] => nil, [1, 3] => yellow_disc, [2, 3] => nil, [3, 3] => nil, [4, 3] => nil, [5, 3] => nil, [6, 3] => nil,
-      [0, 4] => nil, [1, 4] => nil, [2, 4] => nil, [3, 4] => nil, [4, 4] => nil, [5, 4] => nil, [6, 4] => nil,
-      [0, 5] => nil, [1, 5] => nil, [2, 5] => nil, [3, 5] => nil, [4, 5] => nil, [5, 5] => nil, [6, 5] => nil
-    }
+    [
+      [red_disc, red_disc, red_disc, yellow_disc, nil, nil, nil],
+      [yellow_disc, red_disc, yellow_disc, red_disc, nil, nil, nil],
+      [nil, red_disc, red_disc, nil, nil, nil, nil],
+      [nil, yellow_disc, nil, nil, nil, nil, nil],
+      [nil, nil, nil, nil, nil, nil, nil],
+      [nil, nil, nil, nil, nil, nil, nil]
+    ]
   end
 
   describe '#place_disc' do
@@ -47,14 +47,6 @@ describe Board do
 
     context 'when the first column is partially full' do
       before do
-        partial_board = {
-          [0, 0] => red_disc, [1, 0] => nil, [2, 0] => nil, [3, 0] => nil, [4, 0] => nil, [5, 0] => nil, [6, 0] => nil,
-          [0, 1] => yellow_disc, [1, 1] => nil, [2, 1] => nil, [3, 1] => nil, [4, 1] => nil, [5, 1] => nil, [6, 1] => nil,
-          [0, 2] => red_disc, [1, 2] => nil, [2, 2] => nil, [3, 2] => nil, [4, 2] => nil, [5, 2] => nil, [6, 2] => nil,
-          [0, 3] => red_disc, [1, 3] => nil, [2, 3] => nil, [3, 3] => nil, [4, 3] => nil, [5, 3] => nil, [6, 3] => nil,
-          [0, 4] => nil, [1, 4] => nil, [2, 4] => nil, [3, 4] => nil, [4, 4] => nil, [5, 4] => nil, [6, 4] => nil,
-          [0, 5] => nil, [1, 5] => nil, [2, 5] => nil, [3, 5] => nil, [4, 5] => nil, [5, 5] => nil, [6, 5] => nil
-        }
         board.instance_variable_set(:@board_grid, partial_board)
       end
       it 'places a red disc in column 1' do
@@ -67,14 +59,6 @@ describe Board do
 
     context 'when the fourth column is partially full' do
       before do
-        partial_board = {
-          [0, 0] => nil, [1, 0] => nil, [2, 0] => nil, [3, 0] => yellow_disc, [4, 0] => nil, [5, 0] => nil, [6, 0] => nil,
-          [0, 1] => nil, [1, 1] => nil, [2, 1] => nil, [3, 1] => red_disc, [4, 1] => nil, [5, 1] => nil, [6, 1] => nil,
-          [0, 2] => nil, [1, 2] => nil, [2, 2] => nil, [3, 2] => nil, [4, 2] => nil, [5, 2] => nil, [6, 2] => nil,
-          [0, 3] => nil, [1, 3] => nil, [2, 3] => nil, [3, 3] => nil, [4, 3] => nil, [5, 3] => nil, [6, 3] => nil,
-          [0, 4] => nil, [1, 4] => nil, [2, 4] => nil, [3, 4] => nil, [4, 4] => nil, [5, 4] => nil, [6, 4] => nil,
-          [0, 5] => nil, [1, 5] => nil, [2, 5] => nil, [3, 5] => nil, [4, 5] => nil, [5, 5] => nil, [6, 5] => nil
-        }
         board.instance_variable_set(:@board_grid, partial_board)
       end
       it 'places a yellow disc in column 4' do
@@ -100,14 +84,14 @@ describe Board do
     context 'when a column is full' do
       subject(:board_full_column) { described_class.new }
       before do
-        board_with_full_col = {
-          [0, 0] => red_disc, [1, 0] => red_disc, [2, 0] => red_disc, [3, 0] => yellow_disc, [4, 0] => nil, [5, 0] => nil, [6, 0] => nil,
-          [0, 1] => yellow_disc, [1, 1] => yellow_disc, [2, 1] => yellow_disc, [3, 1] => red_disc, [4, 1] => nil, [5, 1] => nil, [6, 1] => nil,
-          [0, 2] => nil, [1, 2] => red_disc, [2, 2] => red_disc, [3, 2] => nil, [4, 2] => nil, [5, 2] => nil, [6, 2] => nil,
-          [0, 3] => nil, [1, 3] => yellow_disc, [2, 3] => nil, [3, 3] => nil, [4, 3] => nil, [5, 3] => nil, [6, 3] => nil,
-          [0, 4] => nil, [1, 4] => red_disc, [2, 4] => nil, [3, 4] => nil, [4, 4] => nil, [5, 4] => nil, [6, 4] => nil,
-          [0, 5] => nil, [1, 5] => yellow_disc, [2, 5] => nil, [3, 5] => nil, [4, 5] => nil, [5, 5] => nil, [6, 5] => nil
-        }
+        board_with_full_col = [
+          [red_disc, red_disc, red_disc, yellow_disc, nil, nil, nil],
+          [yellow_disc, yellow_disc, yellow_disc, red_disc, nil, nil, nil],
+          [nil, red_disc, red_disc, nil, nil, nil, nil],
+          [nil, yellow_disc, nil, nil, nil, nil, nil],
+          [nil, red_disc, nil, nil, nil, nil, nil],
+          [nil, yellow_disc, nil, nil, nil, nil, nil]
+        ]
         board_full_column.instance_variable_set(:@board_grid, board_with_full_col)
       end
       it 'returns true when column 2 is full' do
@@ -132,14 +116,14 @@ describe Board do
       context 'when the connect four is a column' do
         subject(:board_column_connect) { described_class.new }
         before do
-          board_with_connect = {
-            [0, 0] => red_disc, [1, 0] => red_disc, [2, 0] => red_disc, [3, 0] => yellow_disc, [4, 0] => nil, [5, 0] => nil, [6, 0] => nil,
-            [0, 1] => yellow_disc, [1, 1] => red_disc, [2, 1] => yellow_disc, [3, 1] => red_disc, [4, 1] => nil, [5, 1] => nil, [6, 1] => nil,
-            [0, 2] => nil, [1, 2] => red_disc, [2, 2] => red_disc, [3, 2] => nil, [4, 2] => nil, [5, 2] => nil, [6, 2] => nil,
-            [0, 3] => nil, [1, 3] => red_disc, [2, 3] => nil, [3, 3] => nil, [4, 3] => nil, [5, 3] => nil, [6, 3] => nil,
-            [0, 4] => nil, [1, 4] => nil, [2, 4] => nil, [3, 4] => nil, [4, 4] => nil, [5, 4] => nil, [6, 4] => nil,
-            [0, 5] => nil, [1, 5] => nil, [2, 5] => nil, [3, 5] => nil, [4, 5] => nil, [5, 5] => nil, [6, 5] => nil
-          }
+          board_with_connect = [
+            [red_disc, red_disc, red_disc, yellow_disc, nil, nil, nil],
+            [yellow_disc, red_disc, yellow_disc, red_disc, nil, nil, nil],
+            [nil, red_disc, red_disc, nil, nil, nil, nil],
+            [nil, red_disc, nil, nil, nil, nil, nil],
+            [nil, nil, nil, nil, nil, nil, nil],
+            [nil, nil, nil, nil, nil, nil, nil]
+          ]
           board_column_connect.instance_variable_set(:@board_grid, board_with_connect)
         end
         it "returns true when there's a connect four of red discs in column 2" do
