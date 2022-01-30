@@ -25,7 +25,7 @@ class Board
   end
 
   def connect_four?(disc)
-    all_conditions = (all_columns + all_rows + main_diagonals + anti_diagonals)
+    all_conditions = (board_grid + all_columns + main_diagonals + anti_diagonals)
     all_conditions.any? { |section| four_consecutive?(section, disc) }
   end
 
@@ -43,16 +43,6 @@ class Board
 
   private
 
-  def create_board
-    board_hash = {}
-    HEIGHT.times do |y|
-      WIDTH.times do |x|
-        board_hash[[x, y]] = nil
-      end
-    end
-    board_hash
-  end
-
   def four_consecutive?(subsection, disc)
     connect = false
     subsection.each_cons(4) do |cons4|
@@ -61,25 +51,16 @@ class Board
     connect
   end
 
-  def all_rows
-    row_coords = []
-    HEIGHT.times do |i|
-      row = (0..HEIGHT).to_a.product([i]).map { |ndx| board_grid[ndx] }
-      row_coords << row
-    end
-    row_coords
-  end
-
   def all_columns
     board_grid.transpose
   end
 
-  def traverse_diagonally(coordinate, main:)
+  def traverse_diagonally(coordinate, grid = board_grid)
     x, y = coordinate
     results = []
     until x >= WIDTH || y >= HEIGHT
-      results << board_grid[[x, y]]
-      main ? x += 1 : x -= 1
+      results << grid[y][x]
+      x += 1
       y += 1
     end
     results
@@ -88,16 +69,14 @@ class Board
   def main_diagonals
     origins = [[0, 0], [1, 0], [2, 0], [3, 0], [0, 1], [0, 2]]
     diagonals = []
-    origins.each { |origin| diagonals << traverse_diagonally(origin, main: true) }
+    origins.each { |origin| diagonals << traverse_diagonally(origin) }
     diagonals
   end
 
   def anti_diagonals
-    origins = [[3, 0], [4, 0], [5, 0], [6, 0], [6, 1], [6, 2]]
+    origins = [[0, 0], [1, 0], [2, 0], [3, 0], [0, 1], [0, 2]]
     diagonals = []
-    origins.each { |origin| diagonals << traverse_diagonally(origin, main: false) }
+    origins.each { |origin| diagonals << traverse_diagonally(origin, board_grid.map(&:reverse)) }
     diagonals
   end
 end
-
-p Board.new.board_grid
