@@ -6,17 +6,17 @@ class Board
   attr_reader :board_grid
 
   def initialize
-    @board_grid = create_board
+    @board_grid = Array.new(HEIGHT) { Array.new(WIDTH) }
   end
 
   WIDTH = 7
   HEIGHT = 6
 
-  def place_disc(color, column)
-    x = column.to_i - 1 # TODO: consider abstraction or placement?
+  def place_disc(disc, column)
+    x = column.to_i - 1
     y = 0
-    y += 1 until board_grid[[x, y]].nil?
-    board_grid[[x, y]] = color
+    y += 1 until board_grid[y][x].nil?
+    board_grid[y][x] = disc
   end
 
   def column_full?(column)
@@ -99,3 +99,5 @@ class Board
     diagonals
   end
 end
+
+p Board.new.board_grid
