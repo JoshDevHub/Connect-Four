@@ -6,9 +6,9 @@ module Display
     puts <<~HEREDOC
       Welcome to Connect Four!
 
-      The goal of the game is to connect a consecutive row of four discs with your color.
-      This row can occur on rows, columns, and diagonals. Player 1 will use the
-      yellow discs, and Player 2 will use the red discs. Press Enter to start the game >>
+      The goal of the game is to connect a consecutive row of four of your discs.
+      This consecutive row can occur on horizontal rows, vertical columns, or
+      along diagonals. Press Enter to continue >>
     HEREDOC
     gets
   end
