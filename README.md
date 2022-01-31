@@ -12,7 +12,7 @@ I learned a ton about testing and rspec through the development of this. I've en
 
 ## How to Play
 
-Visit the live repl HERE
+Visit the live repl [HERE](https://replit.com/@jmsmith1018/Connect-Four#README.md) and click 'RUN'
 
 ## Special Thanks
 
