@@ -46,7 +46,7 @@ module Display
       invalid_column: "Please only use numbers 1-7, and don't try to place a piece in a full column.",
       not_yn: "Please only use 'Y' or 'N' to answer.",
       invalid_name: 'Please only use one word of alphabetical characters',
-      invalid_disc: "Please enter a valid disc color. Name the color you want. You can't pick a disc that's already been chosen",
+      invalid_disc: "Please enter a valid disc color. Note that you can't pick a disc that's already been chosen"
     }[message]
   end
 

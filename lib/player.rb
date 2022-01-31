@@ -16,6 +16,14 @@ class Player
     attr_reader :chosen_discs
   end
 
+  def self.count
+    @player_counter += 1
+  end
+
+  def self.add_choice(choice)
+    @chosen_discs << choice
+  end
+
   def initialize
     @disc = nil
     @name = "Player #{self.class.count}"
@@ -57,14 +65,6 @@ class Player
   end
 
   private
-
-  def self.count
-    @player_counter += 1
-  end
-
-  def self.add_choice(choice)
-    @chosen_discs << choice
-  end
 
   def name_validator
     ->(input) { /^[a-zA-Z]+$/.match?(input) && input.size < 20 }
