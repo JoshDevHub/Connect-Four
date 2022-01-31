@@ -49,6 +49,7 @@ class Player
     disc_choice = user_input(error, &disc_validator)
     self.class.add_choice(disc_choice)
     @disc = DISCS[disc_choice.to_sym]
+    puts disc_message(disc)
   end
 
   def to_s

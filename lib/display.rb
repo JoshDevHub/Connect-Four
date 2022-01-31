@@ -27,6 +27,11 @@ module Display
     puts blank_line + disc_string + blank_line
   end
 
+  def disc_message(disc)
+    puts "You've chosen to play with #{disc}"
+    puts "Excellent choice! #{blank_line}"
+  end
+
   def query_message(message)
     {
       player_name: 'What would you like your name to be?',
