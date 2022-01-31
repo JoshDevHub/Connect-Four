@@ -37,14 +37,16 @@ class Player
 
   def input_name
     puts "#{name}, #{query_message(:player_name)}"
-    user_name = validate_user_input(&name_validator)
+    error = error_message(:invalid_name)
+    user_name = user_input(error, &name_validator)
     @name = user_name
   end
 
   def choose_disc
     print_discs(DISCS.values)
     puts "#{name}, #{query_message(:disc_choice)}"
-    disc_choice = validate_user_input(&disc_validator)
+    error = error_message(:invalid_disc)
+    disc_choice = user_input(error, &disc_validator)
     self.class.add_choice(disc_choice)
     @disc = DISCS[disc_choice.to_sym]
   end
@@ -64,25 +66,13 @@ class Player
   end
 
   def name_validator
-    lambda do |input|
-      if /^[a-zA-Z]+$/.match?(input) && input.size < 20
-        true
-      else
-        puts error_message(:invalid_name)
-      end
-    end
+    ->(input) { /^[a-zA-Z]+$/.match?(input) && input.size < 20 }
   end
 
   def disc_validator
     lambda do |input|
       input.downcase!
-      if self.class.chosen_discs.include?(input)
-        puts error_message(:chosen_disc)
-      elsif DISCS.key?(input.to_sym)
-        true
-      else
-        puts error_message(:invalid_disc)
-      end
+      self.class.chosen_discs.none?(input) && DISCS.key?(input.to_sym)
     end
   end
 end

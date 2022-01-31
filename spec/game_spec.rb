@@ -20,7 +20,7 @@ describe ConnectFour::Game do
       before do
         allow(game).to receive(:puts)
         quit = 'n'
-        allow(game).to receive_message_chain(:gets, :chomp).and_return(quit)
+        allow(game).to receive_message_chain(:gets, :strip).and_return(quit)
       end
 
       it 'calls game_loop one time' do
@@ -34,7 +34,7 @@ describe ConnectFour::Game do
         allow(game).to receive(:puts)
         play_again = 'y'
         quit = 'n'
-        allow(game).to receive_message_chain(:gets, :chomp).and_return(play_again, quit)
+        allow(game).to receive_message_chain(:gets, :strip).and_return(play_again, quit)
       end
 
       it 'calls game_loop twice' do
@@ -48,7 +48,7 @@ describe ConnectFour::Game do
         allow(game).to receive(:puts)
         play_again = 'y'
         quit = 'n'
-        allow(game).to receive_message_chain(:gets, :chomp).and_return(play_again, play_again, play_again, play_again, quit)
+        allow(game).to receive_message_chain(:gets, :strip).and_return(play_again, play_again, play_again, play_again, quit)
       end
 
       it 'calls game_loop five times' do

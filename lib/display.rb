@@ -38,12 +38,10 @@ module Display
 
   def error_message(message)
     {
-      not_in_range: 'That input is not in the range of columns you can place your piece in. Try again.',
-      column_full: 'That column is already filled! Please choose a different one',
+      invalid_column: "Please only use numbers 1-7, and don't try to place a piece in a full column.",
       not_yn: "Please only use 'Y' or 'N' to answer.",
       invalid_name: 'Please only use one word of alphabetical characters',
-      invalid_disc: 'Please enter a valid disc color. Name the color you want:',
-      chosen_disc: 'Eek! That color has already been picked. Please pick a new one: '
+      invalid_disc: "Please enter a valid disc color. Name the color you want. You can't pick a disc that's already been chosen",
     }[message]
   end
 

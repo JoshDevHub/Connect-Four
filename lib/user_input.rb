@@ -7,23 +7,20 @@ module UserInput
   include Display
 
   def give_yes_no_input
-    validate_user_input(&yes_no_validator)
+    error = error_message(:not_yn)
+    user_input(error, &yes_no_validator)
   end
 
   def yes_no_validator
-    lambda do |input|
-      if %w[y n].none?(input)
-        puts error_message(:not_yn)
-      else
-        true
-      end
-    end
+    ->(input) { %w[y n].include?(input) }
   end
 
-  def validate_user_input(&validator)
-    input = gets.chomp
-    return input if validator.call(input)
+  def user_input(error_msg, &validator)
+    loop do
+      input = gets.strip
+      return input if validator.call(input)
 
-    validate_user_input(&validator)
+      puts error_msg
+    end
   end
 end

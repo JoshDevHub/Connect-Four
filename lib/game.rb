@@ -4,7 +4,6 @@ require_relative 'display'
 require_relative 'board'
 require_relative 'player'
 require_relative 'user_input'
-require 'pry-byebug'
 
 # module wrapper for Game Logic
 module ConnectFour
@@ -68,19 +67,12 @@ module ConnectFour
     end
 
     def column_selection
-      validate_user_input(&column_validator)
+      error = error_message(:invalid_column)
+      user_input(error, &column_validator)
     end
 
     def column_validator
-      lambda do |input|
-        if !game_board.in_range?(input)
-          puts error_message(:not_in_range)
-        elsif game_board.column_full?(input)
-          puts error_message(:column_full)
-        else
-          true
-        end
-      end
+      ->(input) { game_board.in_range?(input) && !game_board.column_full?(input) }
     end
 
     def reset_game
