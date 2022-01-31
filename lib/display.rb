@@ -15,6 +15,7 @@ module Display
 
   def print_board(board)
     column_labels = '  1    2    3    4    5    6    7  '
+    puts blank_line
     puts column_labels
     puts board
     puts column_labels
@@ -23,7 +24,7 @@ module Display
   def print_discs(discs)
     disc_string = ''
     discs.each { |disc| disc_string += "#{disc}  " }
-    puts disc_string + "\n\n"
+    puts blank_line + disc_string + blank_line
   end
 
   def query_message(message)
@@ -44,5 +45,9 @@ module Display
       invalid_disc: 'Please enter a valid disc color. Name the color you want:',
       chosen_disc: 'Eek! That color has already been picked. Please pick a new one: '
     }[message]
+  end
+
+  def blank_line
+    "\n\n"
   end
 end
